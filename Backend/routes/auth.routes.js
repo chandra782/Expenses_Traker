@@ -2,6 +2,7 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const db = require("../db");
+const JWT_SECRET = "SECRET_KEY";
 
 const router = express.Router();
 
@@ -59,7 +60,7 @@ router.post("/login", (req, res) => {
           companyId: user.company_id,
           role: user.role,
         },
-        "SECRET-KEY",
+        JWT_SECRET,
         { expiresIn: "1d" }
       );
 

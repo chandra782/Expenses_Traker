@@ -15,8 +15,7 @@ db.serialize(() => {
   db.run(`
     CREATE TABLE IF NOT EXISTS companies (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      company_name TEXT NOT NULL,
-      email TEXT UNIQUE NOT NULL
+      name TEXT NOT NULL
     )
   `);
 
@@ -24,9 +23,9 @@ db.serialize(() => {
     CREATE TABLE IF NOT EXISTS users (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       company_id INTEGER,
-      email TEXT UNIQUE NOT NULL,
-      password TEXT NOT NULL,
-      role TEXT NOT NULL
+      email TEXT UNIQUE,
+      password TEXT,
+      role TEXT
     )
   `);
 
@@ -34,10 +33,9 @@ db.serialize(() => {
     CREATE TABLE IF NOT EXISTS expenses (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       company_id INTEGER,
-      user_id INTEGER,
-      category TEXT,
       amount REAL,
-      date TEXT
+      category TEXT,
+      created_at TEXT DEFAULT CURRENT_TIMESTAMP
     )
   `);
 
@@ -45,7 +43,6 @@ db.serialize(() => {
     CREATE TABLE IF NOT EXISTS budgets (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       company_id INTEGER,
-      month TEXT,
       limit_amount REAL
     )
   `);
